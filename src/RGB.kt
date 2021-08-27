@@ -17,19 +17,19 @@ rgb(0, 0, 0) // returns 000000
 rgb(148, 0, 211) // returns 9400D3
  */
 
-fun rgb(r: Int, g: Int, b: Int) = r.toHexString() + g.toHexString() + b.toHexString()
+fun rgb(r: Int, g: Int, b: Int) = listOf(r, g, b).joinToString("") { it.toHexString() }
 
-private fun Int.toHexString() = "%02X".format(0xFF and this.closesValue())
+private fun Int.toHexString() = "%02X".format(0xFF and closesValue())
 
-private fun Int.closesValue() = listOf(0, 255).minBy { abs(it - this) } ?: 0
+private fun Int.closesValue() = (0..255).toList().minBy { abs(it - this) } ?: 0
 
 class Example {
     @Test
     fun testFixed() {
         assertEquals("000000", rgb(0, 0, 0))
         assertEquals("000000", rgb(0, 0, -20))
-        assertEquals("FFFFFF", rgb(300,255,255))
-        assertEquals("ADFF2F", rgb(173,255,47))
+        assertEquals("FFFFFF", rgb(300, 255, 255))
+        assertEquals("ADFF2F", rgb(173, 255, 47))
         assertEquals("9400D3", rgb(148, 0, 211))
     }
 }
