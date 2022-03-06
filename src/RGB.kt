@@ -21,7 +21,7 @@ fun rgb(r: Int, g: Int, b: Int) = listOf(r, g, b).joinToString("") { it.toHexStr
 
 private fun Int.toHexString() = "%02X".format(0xFF and closesValue())
 
-private fun Int.closesValue() = (0..255).toList().minBy { abs(it - this) } ?: 0
+private fun Int.closesValue() = (0..255).toList().minByOrNull { abs(it - this) } ?: 0
 
 class Example {
     @Test

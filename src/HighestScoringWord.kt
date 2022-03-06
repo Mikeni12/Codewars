@@ -16,8 +16,8 @@ All letters will be lowercase and all inputs will be valid.
 val alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray()
 
 fun high(str: String): String = str.split(" ").map { word ->
-    word to word.toCharArray().map { character -> alphabet.indexOf(character) + 1 }.sum()
-}.maxBy { it.second }!!.first
+    word to word.toCharArray().sumOf { character -> alphabet.indexOf(character) + 1 }
+}.maxByOrNull { it.second }?.first ?: String()
 
 class HighestScoringWordTest {
     @Test
